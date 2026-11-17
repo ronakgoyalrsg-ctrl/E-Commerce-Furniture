@@ -6,16 +6,18 @@ const mongoose = require('mongoose')
 const Product = require('./models/Product') 
 
 const app = express()
-const port = 5000
+const port = process.env.PORT || 5000
 
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
-mongoose.connect('mongodb://127.0.0.1:27017/E-Commerce')
-    .then(() => console.log("DB Connected successfully..."))
-    .catch((err) => console.log("DB connection error: " + err))
+mongoose.connect(
+    process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/E-Commerce'
+)
+.then(() => console.log("DB Connected successfully..."))
+.catch((err) => console.log("DB connection error: " + err))
 
 
 let myCart = [] 
