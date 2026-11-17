@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
 const Product = require('./models/Product');
 
-mongoose.connect('mongodb://127.0.0.1:27017/E-Commerce')
-    .then(() => console.log("DB Connected"))
-    .catch((err) => console.log("DB Not Connected" + err))
+mongoose.connect(
+    process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/E-Commerce'
+)
+.then(() => console.log("DB Connected successfully..."))
+.catch((err) => console.log("DB connection error: " + err))
 
 const sampleProducts = [
     {
